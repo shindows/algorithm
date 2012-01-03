@@ -16,7 +16,6 @@ public class MergeSort {
 		long executionTime = endTime - startTime;
 		
 		System.out.println("Execution time : " + executionTime);
-		
 	}
 
 	private static int[] mergeSort(int[] list) {

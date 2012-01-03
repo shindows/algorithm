@@ -5,7 +5,7 @@ import java.util.*;
 public class BinarySearchTree <E extends Comparable<E>> {
 	LinkedList<BinarySearchTreeNode<E>> list = new LinkedList<BinarySearchTreeNode<E>>();
 	BinarySearchTreeNode<E> root;
-	
+
 	public void search(E e) {
 		if (isEmpty(root)) {
 			root = new BinarySearchTreeNode<E>(e);
@@ -20,9 +20,9 @@ public class BinarySearchTree <E extends Comparable<E>> {
 		if (e.equals(current.getTreeNodeElement())) {
 			System.out.println(e + " ÅÀ Search success");
 			return;
-		} else if (e.compareTo(current.getTreeNodeElement()) <= 0 && !childOfTreeNodesIsEmpty(current)) {
-			search(e, current, current.getLeftChildNode());	
-		} else if (e.compareTo(current.getTreeNodeElement()) > 0 && !childOfTreeNodesIsEmpty(current)) {
+		} else if (e.compareTo(current.getTreeNodeElement()) <= 0 && !isEmpty(current.getLeftChildNode())) {
+			search(e, current, current.getLeftChildNode());
+		} else if (e.compareTo(current.getTreeNodeElement()) > 0 && !isEmpty(current.getRightChildNode())) {
 			search(e, current, current.getRightChildNode());
 		} 
 	}
@@ -60,26 +60,26 @@ public class BinarySearchTree <E extends Comparable<E>> {
 	public void delete(E e) {
 		if (isEmpty(root)) {
 			root = new BinarySearchTreeNode<E>(e);
-			
+
 		} else {
 			BinarySearchTreeNode<E> parent = null;
 			BinarySearchTreeNode<E> current = root;
 			searchDeleteElemente(e, parent, current);
 		}
 	}
-	
+
 	public void searchDeleteElemente(E e, BinarySearchTreeNode<E> parent, BinarySearchTreeNode<E> current) {
 		if (e.equals(current.getTreeNodeElement())) {
 			executeDeleteElement(e, parent, current);
-		} else if (e.compareTo(current.getTreeNodeElement()) <= 0 && !childOfTreeNodesIsEmpty(current)) {
+		} else if (e.compareTo(current.getTreeNodeElement()) <= 0 && !isEmpty(current.getLeftChildNode())) {
 			searchDeleteElemente(e, current, current.getLeftChildNode());
-		} else if (e.compareTo(current.getTreeNodeElement()) > 0 && !childOfTreeNodesIsEmpty(current)) {
+		} else if (e.compareTo(current.getTreeNodeElement()) > 0 && !isEmpty(current.getRightChildNode())) {
 			searchDeleteElemente(e, current, current.getRightChildNode());
 		} 	
 	}
-	
+
 	public void executeDeleteElement(E e, BinarySearchTreeNode<E> parent, BinarySearchTreeNode<E> current) {
-		if (childOfTreeNodesIsEmpty(current)) {
+		if (isEmpty(current.getLeftChildNode()) || isEmpty(current.getRightChildNode())) {
 			if (e.compareTo(parent.getTreeNodeElement()) < 0) {
 				parent.setLeftChildNode(null);
 			} else {
@@ -98,7 +98,7 @@ public class BinarySearchTree <E extends Comparable<E>> {
 				rightMost.setLeftChildNode(current.getLeftChildNode());
 				rightMost.setRightChildNode(current.getRightChildNode());
 				parentOfRightMost.setRightChildNode(null);
-				
+
 				if (isEmpty(parent)) {
 					root = rightMost;
 				} else {
@@ -107,9 +107,10 @@ public class BinarySearchTree <E extends Comparable<E>> {
 			}
 		}
 	}
-	
+
 	public void preorder() {
 		preorder(root);
+		System.out.println();
 	}
 
 	public void preorder(BinarySearchTreeNode<E> treeNode){
@@ -120,11 +121,12 @@ public class BinarySearchTree <E extends Comparable<E>> {
 		preorder(treeNode.getLeftChildNode());
 		preorder(treeNode.getRightChildNode());
 	}
-	
+
 	public void inorder() {
 		inorder(root);
+		System.out.println();
 	}
-	
+
 	public void inorder(BinarySearchTreeNode<E> treeNode){
 		if (isEmpty(treeNode)) {
 			return;
@@ -136,8 +138,9 @@ public class BinarySearchTree <E extends Comparable<E>> {
 
 	public void postorder() {
 		postorder(root);
+		System.out.println();
 	}
-	
+
 	public void postorder(BinarySearchTreeNode<E> treeNode){
 		if (isEmpty(treeNode)) {
 			return;
@@ -147,13 +150,14 @@ public class BinarySearchTree <E extends Comparable<E>> {
 		System.out.print(treeNode.getTreeNodeElement() + " "); 
 	}
 
-	
+
 	public void breadthFirstTrabersal() {
 		list.add(root);
 		breadthFirstTrabersal(root);
+		System.out.println();
 	}
-	
-	
+
+
 	public void breadthFirstTrabersal(BinarySearchTreeNode<E> treeNode) {		
 		if (!isEmpty(treeNode.getLeftChildNode())) {
 			list.add(treeNode.getLeftChildNode());
@@ -161,14 +165,14 @@ public class BinarySearchTree <E extends Comparable<E>> {
 		if (!isEmpty(treeNode.getRightChildNode())) {
 			list.add(treeNode.getRightChildNode());
 		}
-		
+
 		System.out.print(list.removeFirst().getTreeNodeElement() + " ");
 		if(list.isEmpty()) {
 			return;
 		}
 		breadthFirstTrabersal(list.getFirst());
 	}
-/*	
+	/*	
 	public boolean elementLtTreeNode (E e, BinarySearchTreeNode<E> current) {
 		if (e.compareTo(current.getTreeNodeElement()) < 0) {
 			return true;
@@ -182,18 +186,18 @@ public class BinarySearchTree <E extends Comparable<E>> {
 		}
 		return false;	
 	}
-	*/
+	 */
 	public boolean isEmpty(BinarySearchTreeNode<E> treeNode) {
 		if (treeNode == null) {
 			return true;
 		}
 		return false;
 	}
-	
-	public boolean childOfTreeNodesIsEmpty(BinarySearchTreeNode<E> treeNode) {
+
+	/*public boolean childOfTreeNodesIsEmpty(BinarySearchTreeNode<E> treeNode) {
 		if (treeNode.getLeftChildNode() == null && treeNode.getRightChildNode() == null) {
 			return true;
 		}
 		return false;
-	}
+	}*/
 }

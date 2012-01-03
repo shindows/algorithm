@@ -21,7 +21,6 @@ public class BinarySearch {
 			double executionTime = endTime - startTime;
 			
 			System.out.println("Execution time : " + executionTime);
-			
 		}
 	}
 

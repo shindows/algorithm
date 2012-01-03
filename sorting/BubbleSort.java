@@ -19,7 +19,7 @@ public class BubbleSort {
 					list[j + 1] = tmp;
 				}
 			}
-		}
+	}
 
 		long endTime = System.currentTimeMillis();
 		long executionTime = endTime - startTime;

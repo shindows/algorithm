@@ -22,7 +22,6 @@ public class InsertionSort {
 		
 		long endTime = System.currentTimeMillis();
 		long executionTime = endTime - startTime;
-		
 		System.out.println("Execution time : " + executionTime);
 	}
 	
